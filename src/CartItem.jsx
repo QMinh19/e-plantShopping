@@ -28,6 +28,11 @@ const CartItem = ({ onContinueShopping }) => {
       dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 })); // Decrement quantity
     }
   };
+  const handleUpdateQuantity = (item, quantity) => {
+    if (quantity > 0) {
+        dispatch(updateQuantity({ ...item, quantity })); // Dispatch updateQuantity action
+        }
+    };
 
   const handleRemove = (item) => {
     dispatch(removeItem(item.name)); // Remove item from cart
@@ -56,6 +61,8 @@ const CartItem = ({ onContinueShopping }) => {
               </div>
               <div className="cart-item-total">Subtotal: ${calculateTotalCost(item)}</div>
               <button className="cart-item-delete" onClick={() => handleRemove(item)}>Delete</button>
+              {/* Add button to re-add item back to the cart */}
+              <button className="cart-item-add-back" onClick={() => handleAddBackToCart(item)}>Add Back</button>
             </div>
           </div>
         ))}
